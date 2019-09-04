@@ -13,15 +13,17 @@ const posts = require("./routes/api/posts");
 const db = require("./config/keys").mongoURI;
 
 // 使用body-parser中间件
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(bodyParser.json());
 
 
 
 // Connect to mongodb
 mongoose.connect(db)
-        .then(() => console.log("MongoDB Connected"))
-        .catch(err => console.log(err));
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
 
 // 使用中间件实现允许跨域
@@ -42,12 +44,12 @@ require("./config/passport")(passport);
 // })
 
 // 使用routes
-app.use("/api/users",users);
-app.use("/api/profile",profile);
-app.use("/api/posts",posts);
+app.use("/api/users", users);
+app.use("/api/profile", profile);
+app.use("/api/posts", posts);
 
 const port = process.env.PORT || 5000;
 
-app.listen(port,() => {
+app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 })
